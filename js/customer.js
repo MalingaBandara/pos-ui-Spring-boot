@@ -39,3 +39,24 @@ const createOrUpdateCustomer =  ()=> {
       }
 
 }
+
+
+// Load all customer data
+const loadData =  ()=> {
+
+    // Get the customer data in API pos System
+    $.ajax ({
+
+        url: 'http://localhost:8001/api/v1/customers/list?page=0&size=10&searchText=',
+        contentType: 'application/json',
+        method: 'GET',
+        success: (response)=>{
+            console.log(response);
+        },
+        error: (error)=>{
+            console.error( 'This is an Error', error );
+            toastr.error('Error.') // error, info, warning
+        }
+    });
+
+}
