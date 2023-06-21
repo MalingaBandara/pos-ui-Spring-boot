@@ -13,6 +13,101 @@
 </head>
 <body>
 
+<!-- **** Navigation Bar ***** -->
+<nav class="navbar bg-dark border-bottom-dark navbar-expand-lg bg-body-tertiary"  data-bs-theme="dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">POS</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Customer</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link" href="product.html">Product</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- ********************* -->
+
+
+<hr>
+
+<form action="#" >
+    <div class="container">
+        <div class="row">
+
+            <!-- Name -->
+            <div class="col-12 col-lg-3 ">
+                <div class="form-group">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Name">
+                </div>
+            </div>
+
+            <!-- Address -->
+            <div class="col-12 col-lg-3">
+                <div class="form-group">
+                    <input type="text" name="address" id="address" class="form-control" placeholder="Address">
+                </div>
+            </div>
+
+            <!-- Salary -->
+            <div class="col-12 col-lg-3">
+                <div class="form-group">
+                    <input type="number" name="salary" id="salary" class="form-control" placeholder="Salary" >
+                </div>
+            </div>
+
+            
+            <div class="col-12 col-lg-3">
+                <input type="button" value="Save Customer" class="btn-primary btn btn-sm" onclick="createOrUpdateCustomer()">
+            </div>
+            
+        </div>
+    </div>
+</form>
+
+<hr>
+
+<!-- ***** Table ***** -->
+<div class="outer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Address</th>
+                            <th>Salary</th>
+                            <th>Active State</th>
+                            <th>Operate</th>
+                        </tr>
+                    </thead>
+
+                     <tbody>
+                     <td>34234</td>
+                     <td>Samantha</td>
+                     <td>50000</td>
+                     <td>Colombo</td>
+                     <td>Active</td>
+                     <td> <button class="btn btn-danger">Delete Customer</button> </td>
+                     </tbody>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** **** ***** -->
 
 
 
