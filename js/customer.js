@@ -59,7 +59,7 @@ const loadData =  ()=> {
         success: (response)=>{
             console.log(response);
 
-                    // set data into table view
+                   // set data into table view
                     for ( let tempData of response.data.list ) {
 
                         let tBody = document.getElementById( 't-body' );
@@ -72,13 +72,21 @@ const loadData =  ()=> {
                             let cel5 = row.insertCell();
                             let cel6 = row.insertCell();
 
+                            // add delete button into the row
+                                let btn = document.createElement( 'button' );
+                                btn.textContent = 'Delete';
+                            cel6.appendChild( btn );
+
+                                // add button action
+                                btn.addEventListener( 'click', ()=> {
+                                    alert( 'delete' );
+                                } )
+
                             cel1.textContent = `${tempData.publicId}`;
                             cel2.textContent = `${tempData.name}`;
                             cel3.textContent = `${tempData.address}`;
                             cel4.textContent = `${tempData.salary}`;
                             cel5.textContent = `${tempData.activeState}`;
-                            cel6.textContent = `<button class="btn btn-danger">Delete Customer</button>`;
-
 
 
                     }
