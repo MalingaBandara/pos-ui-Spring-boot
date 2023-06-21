@@ -59,7 +59,7 @@ const loadData =  ()=> {
         success: (response)=>{
             console.log(response);
 
-                   // set data into table view
+           /*// set data into table view
                     for ( let tempData of response.data.list ) {
 
                         let tBody = document.getElementById( 't-body' );
@@ -89,7 +89,38 @@ const loadData =  ()=> {
                             cel5.textContent = `${tempData.activeState}`;
 
 
-                    }
+                    }*/
+
+                    // set data into table view
+                    let data = response.data.list;
+
+                        data.forEach( (record) => { // add all data using for each loop
+
+                                let btn = $('<button>').text( 'Delete Customer' ); // button for delete
+                                    btn.addClass( 'btn' ); //add css class
+                                    btn.addClass( 'btn-danger' ); //add css class
+                                    btn.addClass( 'btn-sm' ); //add css class
+
+                                // delete button action
+                                btn.click ( ()=> {
+                                    deleteCustomer( record.publicId );
+                                } )
+
+                                        let row = $( '<tr>' ); // row
+
+                                        let cell1 = $('<td>').text( record.publicId );  // publicId cell
+                                        let cell2 = $('<td>').text( record.name );     // Name cell
+                                        let cell3 = $('<td>').text( record.address ); // Address cell
+                                        let cell4 = $('<td>').text( record.salary ); // Salary cell
+                                        let cell5 = $('<td>').text( record.activeState ); // Active State cell
+                                        let cell6 = $('<td>').append( btn ) // Delete Button cell
+
+                                    row.append( cell1, cell2, cell3, cell4, cell5, cell6 ); // append cells into the row
+
+                                $( '#t-body' ).append( row ); // append row to the table
+
+
+                        } )
 
 
             document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
@@ -101,4 +132,10 @@ const loadData =  ()=> {
         }
     });
 
+}
+
+
+function deleteCustomer (id) {
+
+    console.log( id ); // print id
 }
