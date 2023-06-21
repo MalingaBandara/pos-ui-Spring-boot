@@ -10,13 +10,27 @@ const createOrUpdateCustomer =  ()=> {
 
 
           // create custom data using text filed data
-              let cutomerData = {
+              let customerData = {
                   name: $( '#name' ).val(),
-                  address: $( '#salary' ).val(),
+                  address: $( '#address' ).val(),
                   salary: parseFloat( salary )
               }
 
-              console.log( cutomerData ); // print the data
+
+                        // pass the customer data to API pos System
+                            $.ajax ({
+
+                                    url: 'http://localhost:8001/api/v1/customers',
+                                    data: JSON.stringify( customerData ),
+                                    contentType: 'application/json',
+                                    method: 'POST',
+                                    success: (response)=>{
+                                        console.log(response);
+                                    },
+                                    error: (error)=>{
+                                        console.error( 'This is an Error', error );
+                                    }
+                            });
 
       } else{
           alert( 'please insert a valid number' );
