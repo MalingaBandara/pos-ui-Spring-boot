@@ -58,7 +58,33 @@ const loadData =  ()=> {
         method: 'GET',
         success: (response)=>{
             console.log(response);
-                document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
+
+                    // set data into table view
+                    for ( let tempData of response.data.list ) {
+
+                        let tBody = document.getElementById( 't-body' );
+                        let row = tBody.insertRow();
+
+                            let cel1 = row.insertCell();
+                            let cel2 = row.insertCell();
+                            let cel3 = row.insertCell();
+                            let cel4 = row.insertCell();
+                            let cel5 = row.insertCell();
+                            let cel6 = row.insertCell();
+
+                            cel1.textContent = `${tempData.publicId}`;
+                            cel2.textContent = `${tempData.name}`;
+                            cel3.textContent = `${tempData.address}`;
+                            cel4.textContent = `${tempData.salary}`;
+                            cel5.textContent = `${tempData.activeState}`;
+                            cel6.textContent = `<button class="btn btn-danger">Delete Customer</button>`;
+
+
+
+                    }
+
+
+            document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
         },
         error: (error)=>{
             document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
