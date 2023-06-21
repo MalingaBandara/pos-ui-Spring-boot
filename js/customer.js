@@ -26,9 +26,11 @@ const createOrUpdateCustomer =  ()=> {
                                     method: 'POST',
                                     success: (response)=>{
                                         console.log(response);
+                                        toastr.success('Successfully Created.') // error, info, warning
                                     },
                                     error: (error)=>{
                                         console.error( 'This is an Error', error );
+                                        toastr.error('Error.') // error, info, warning
                                     }
                             });
 
