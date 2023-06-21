@@ -17,6 +17,8 @@ const createOrUpdateCustomer =  ()=> {
               }
 
 
+          document.getElementById( 'loader' ).style.display= 'flex'; // show Loading Effect
+
                         // pass the customer data to API pos System
                             $.ajax ({
 
@@ -27,8 +29,10 @@ const createOrUpdateCustomer =  ()=> {
                                     success: (response)=>{
                                         console.log(response);
                                         toastr.success('Successfully Created.') // error, info, warning
+                                            document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
                                     },
                                     error: (error)=>{
+                                        document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
                                         console.error( 'This is an Error', error );
                                         toastr.error('Error.') // error, info, warning
                                     }
@@ -44,6 +48,8 @@ const createOrUpdateCustomer =  ()=> {
 // Load all customer data
 const loadData =  ()=> {
 
+    document.getElementById( 'loader' ).style.display= 'flex'; // show Loading Effect
+
     // Get the customer data in API pos System
     $.ajax ({
 
@@ -52,8 +58,10 @@ const loadData =  ()=> {
         method: 'GET',
         success: (response)=>{
             console.log(response);
+                document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
         },
         error: (error)=>{
+            document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
             console.error( 'This is an Error', error );
             toastr.error('Error.') // error, info, warning
         }
