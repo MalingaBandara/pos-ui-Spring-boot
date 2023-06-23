@@ -45,8 +45,12 @@ const createOrUpdateCustomer =  ()=> {
 }
 
 
+let page = 0;
+let size = 10;
+
+
 // Load all customer data
-const loadData =  ()=> {
+const loadData =  ( page, size )=> {
 
     document.getElementById( 'loader' ).style.display= 'flex'; // show Loading Effect
 
@@ -94,8 +98,24 @@ const loadData =  ()=> {
                     // set data into table view
                     let data = response.data.list;
 
-                // display all inside 'data' list
+                        // display all inside 'data' list
                         displayData( data );
+
+                //add pagination
+                /*$( '#pagination-context' ).pagination({
+
+                   dataSource: response.data.dataCount,
+                    pageSize: size,
+                    pageNumber: page,
+                    callback: function ( data, pagination ) {
+
+                       page = pagination.pageNumber;
+                       loadData( page, size )
+
+                    }
+
+                });*/
+
 
 
             document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
@@ -145,5 +165,24 @@ function displayData ( data) {
 
 
 function deleteCustomer (id) {
-    console.log( id ); // print id
+
+    document.getElementById( 'loader' ).style.display= 'flex'; // show Loading Effect
+
+    // delete the customer data to API pos System
+    $.ajax ({
+
+        url: 'http://localhost:8001/api/v1/customers?id=' + id ,
+        contentType: 'application/json',
+        method: 'DELETE',
+        success: (response)=>{
+            toastr.success('Successfully Deleted.') // error, info, warning
+                loadData( page , size ) // load data
+        },
+        error: (error)=>{
+            document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
+            console.error( 'This is an Error', error );
+            toastr.error('Error.') // error, info, warning
+        }
+    });
+
 }
