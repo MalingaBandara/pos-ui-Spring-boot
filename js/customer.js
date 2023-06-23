@@ -137,14 +137,26 @@ function displayData ( data) {
 
     data.forEach( (record) => {
 
-        let btn = $('<button>').text( 'Delete Customer' ); // button for delete
-        btn.addClass( 'btn' ); //add css class
-        btn.addClass( 'btn-danger' ); //add css class
-        btn.addClass( 'btn-sm' ); //add css class
+        let btnDelete = $('<button>').text( 'Delete Customer' ); // button for delete
+        btnDelete.addClass( 'btn' ); //add css class
+        btnDelete.addClass( 'btn-danger' ); //add css class
+        btnDelete.addClass( 'btn-sm' ); //add css class
+
+        let btnUpdate = $('<button>').text( 'Update Customer' ); // button for Update
+        btnUpdate.addClass( 'btn' ); //add css class
+        btnUpdate.addClass( 'btn-warning' ); //add css class
+        btnUpdate.addClass( 'btn-sm' ); //add css class
 
         // delete button action
-        btn.click ( ()=> {
-            deleteCustomer( record.publicId );
+        btnDelete.click ( ()=> {
+            if ( confirm( 'Are you suer?' ) ){
+                    deleteCustomer( record.publicId );
+            }
+        } )
+
+        // update button action
+        btnUpdate.click ( ()=> {
+            setDataForUpdateCustomer( record );
         } )
 
         let row = $( '<tr>' ); // row
@@ -154,15 +166,15 @@ function displayData ( data) {
         let cell3 = $('<td>').text( record.address ); // Address cell
         let cell4 = $('<td>').text( record.salary ); // Salary cell
         let cell5 = $('<td>').text( record.activeState ); // Active State cell
-        let cell6 = $('<td>').append( btn ) // Delete Button cell
+        let cell6 = $('<td>').append( btnDelete ) // Delete Button cell
+        let cell7 = $('<td>').append( btnUpdate ) // Update Button cell
 
-        row.append( cell1, cell2, cell3, cell4, cell5, cell6 ); // append cells into the row
+        row.append( cell1, cell2, cell3, cell4, cell5, cell6, cell7 ); // append cells into the row
 
         $( '#t-body' ).append( row ); // append row to the table
 
 
     } )
-
 }
 
 
@@ -186,5 +198,26 @@ function deleteCustomer (id) {
             toastr.error('Error.') // error, info, warning
         }
     });
+
+}
+
+
+let publicId = undefined;
+
+function setDataForUpdateCustomer (data) {
+
+    publicId = data.publicId;
+
+    let btn = $( '#saveOrUpdateButton' ); // catch Save Customer Button
+
+        btn.removeClass( 'btn-primary' ); // remove button style ( Remove Save Customer button style )
+        btn.addClass( 'btn-success' ); // Add button style ( Add Save Customer button style )
+        btn.text ( 'Update Custom : (' + data.publicId + ')' );  // Add button text
+
+     // set values into text field
+       $( '#name' ).val( data.name );
+       $( '#address' ).val( data.address );
+       $( '#salary' ).val( data.salary );
+
 
 }
