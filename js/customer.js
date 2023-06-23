@@ -133,6 +133,8 @@ const loadData =  ( page, size )=> {
 // method for load data
 function displayData ( data) {
 
+    $( '#t-body' ).empty(); // refresh table body (fetch with API DB)
+
     data.forEach( (record) => {
 
         let btn = $('<button>').text( 'Delete Customer' ); // button for delete
