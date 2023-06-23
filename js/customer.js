@@ -1,4 +1,6 @@
 
+let publicId = undefined; //  undefined means null value
+
 // save Customer Method
 const createOrUpdateCustomer =  ()=> {
 
@@ -19,29 +21,47 @@ const createOrUpdateCustomer =  ()=> {
 
           document.getElementById( 'loader' ).style.display= 'flex'; // show Loading Effect
 
-                        // pass the customer data to API pos System
-                            $.ajax ({
+                url = 'http://localhost:8001/api/v1/customers'; // default url
+                method = 'POST';  // default method
 
-                                    url: 'http://localhost:8001/api/v1/customers',
-                                    data: JSON.stringify( customerData ),
-                                    contentType: 'application/json',
-                                    method: 'POST',
-                                    success: (response)=>{
-                                        console.log(response);
-                                        toastr.success('Successfully Created.') // error, info, warning
+                    // check the method:  if 'publicID' variable has a value the method is 'Update' (PUT)
+                    if ( publicId ) {
+                        url = 'http://localhost:8001/api/v1/customers?id=' + publicId;
+                        method = 'PUT'
+                    }
+
+                            // pass the customer data to API pos System
+                                $.ajax ({
+
+                                        url: url,
+                                        data: JSON.stringify( customerData ),
+                                        contentType: 'application/json',
+                                        method:  method,
+                                        success: (response)=>{
+                                            console.log(response);
+                                            toastr.success('Successfully..!') // error, info, warning
+
+                                                publicId = undefined // remove value of publicId variable (null)
+                                                    $( '#name' ).val( '' ); // remove text in text field
+                                                    $( '#address' ).val( '' ); // remove text in text field
+                                                    $( '#salary' ).val( 0 ); // remove text in text field
+
+                                                $( '#saveOrUpdateButton' ).text( 'Save Customer' ); // reset button
+
+                                            loadData( page, size ); // load table data
+
                                             document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
-                                    },
-                                    error: (error)=>{
-                                        document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
-                                        console.error( 'This is an Error', error );
-                                        toastr.error('Error.') // error, info, warning
-                                    }
-                            });
+                                        },
+                                        error: (error)=>{
+                                            document.getElementById( 'loader' ).style.display= 'none'; // hide Loading Effect
+                                            console.error( 'This is an Error', error );
+                                            toastr.error('Error.') // error, info, warning
+                                        }
+                                });
 
       } else{
           alert( 'please insert a valid number' );
       }
-
 }
 
 
@@ -202,7 +222,7 @@ function deleteCustomer (id) {
 }
 
 
-let publicId = undefined;
+
 
 function setDataForUpdateCustomer (data) {
 
